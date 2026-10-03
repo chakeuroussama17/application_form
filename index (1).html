@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application for Employment – HICOM Engineering</title>
+  <style>
+    :root {
+      --blue: #1f5aa6;
+      --grey: #d9d9d9;
+      --border: #333;
+      --text: #111;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: #eef1f5;
+    }
+    .page {
+      max-width: 900px;
+      margin: 24px auto;
+      background: #fff;
+      padding: 32px 40px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+    .doc-ref { text-align: right; font-size: 12px; }
+    .doc-ref strong { display: block; }
+    .brand { text-align: center; margin: 12px 0 20px; }
+    .brand .name { font-size: 34px; font-weight: 800; color: var(--blue); letter-spacing: 2px; }
+    .brand .sub { font-size: 11px; letter-spacing: 4px; color: var(--blue); }
+    .title-bar {
+      background: var(--grey);
+      font-weight: bold;
+      font-size: 16px;
+      padding: 6px 12px;
+      margin-bottom: 20px;
+    }
+    .post-applied { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; }
+    .post-applied input { border: none; border-bottom: 1px solid var(--border); flex: 0 1 380px; padding: 4px; }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { border: 1px solid var(--border); padding: 6px 8px; vertical-align: top; }
+    th { font-weight: normal; text-align: center; }
+    .section-head th, .section-head td {
+      background: var(--grey);
+      font-weight: bold;
+      text-align: left;
+    }
+    .label { width: 180px; }
+    .label small { display: block; color: #444; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="date"],
+    input[type="number"], textarea {
+      width: 100%;
+      border: none;
+      font: inherit;
+      padding: 4px;
+      background: #fafcff;
+    }
+    input:focus, textarea:focus { outline: 2px solid var(--blue); background: #fff; }
+    textarea { resize: vertical; min-height: 60px; }
+    .yn { white-space: nowrap; }
+    .yn label { margin-left: 12px; }
+    .consent { font-size: 12px; line-height: 1.5; text-align: justify; }
+    .consent p { margin: 6px 0; }
+    .check { display: flex; gap: 8px; align-items: flex-start; margin-top: 8px; font-size: 13px; }
+    .actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
+    button {
+      padding: 10px 22px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid var(--blue);
+      cursor: pointer;
+    }
+    .primary { background: var(--blue); color: #fff; }
+    .secondary { background: #fff; color: var(--blue); }
+    .msg { margin-top: 12px; text-align: right; font-weight: bold; }
+
+    /* Mobile: allow tables to scroll */
+    .scroll { overflow-x: auto; }
+    @media (max-width: 640px) {
+      .page { padding: 20px 16px; margin: 0; }
+      .scroll table { min-width: 600px; }
+    }
+
+    /* Print looks like the paper form */
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; margin: 0; padding: 0; max-width: none; }
+      .actions, .msg { display: none; }
+      input, textarea { background: transparent; }
+      .page-break { page-break-before: always; }
+    }
+  </style>
+</head>
+<body>
+<form id="appForm" class="page" autocomplete="on">
+  <div class="doc-ref">HESB-SOP-HC-01-F01<strong>PRIVATE &amp; CONFIDENTIAL</strong></div>
+
+  <div class="brand">
+    <div class="name">HICOM</div>
+    <div class="sub">ENGINEERING</div>
+  </div>
+
+  <div class="title-bar">APPLICATION FOR EMPLOYMENT</div>
+
+  <div class="post-applied">
+    <label for="post">Post applied for:</label>
+    <input type="text" id="post" name="post_applied" required />
+  </div>
+
+  <!-- PERSONAL PARTICULARS -->
+  <table>
+    <tr class="section-head"><th colspan="3">PERSONAL PARTICULARS</th></tr>
+    <tr>
+      <td class="label">Name of Applicant:<small>(As per Identity Card)</small></td>
+      <td colspan="2"><input type="text" name="name" required /></td>
+    </tr>
+    <tr>
+      <td class="label">Current Residential Address:</td>
+      <td colspan="2"><textarea name="address" rows="3" required></textarea></td>
+    </tr>
+    <tr>
+      <td>Contact Number:<input type="tel" name="contact_number" required /></td>
+      <td>Email:<input type="email" name="email" required /></td>
+      <td>NRIC/Passport:<input type="text" name="nric_passport" required /></td>
+    </tr>
+  </table>
+
+  <!-- QUALIFICATION -->
+  <div class="scroll">
+  <table id="qualTable">
+    <tr class="section-head"><th colspan="4">QUALIFICATION (Kindly attach copies of academic qualification)</th></tr>
+    <tr>
+      <th style="width:45%">Name of College/ University / School</th>
+      <th>Qualification Acquired</th>
+      <th style="width:12%">Results / CGPA</th>
+      <th style="width:12%">Year of Graduation</th>
+    </tr>
+  </table>
+  </div>
+
+  <!-- PROFESSIONAL MEMBERSHIPS -->
+  <table id="memberTable">
+    <tr class="section-head"><th>RELEVANT PROFESSIONAL MEMBERSHIPS</th><th style="width:15%;text-align:center">Year Completed</th></tr>
+  </table>
+
+  <!-- EMPLOYERS -->
+  <div class="scroll">
+  <table id="empTable">
+    <tr class="section-head"><th colspan="5">CURRENT AND PREVIOUS EMPLOYER(S)</th></tr>
+    <tr>
+      <th style="width:38%">Name of Employer</th>
+      <th>Position Held</th>
+      <th style="width:11%">Date Join</th>
+      <th style="width:11%">Date Left</th>
+      <th style="width:14%">Last Drawn Salary</th>
+    </tr>
+  </table>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- NOTICE / SALARY / DECLARATIONS -->
+  <table>
+    <tr>
+      <td>Notice of Termination Required:<input type="text" name="notice_period" /></td>
+      <td>Salary Expected:<input type="text" name="salary_expected" /></td>
+    </tr>
+    <tr>
+      <td>Have you been convicted / charged in any court of law or dismissed by your previous employer?</td>
+      <td class="yn">
+        <label><input type="radio" name="convicted" value="Yes" required /> Yes</label>
+        <label><input type="radio" name="convicted" value="No" /> No</label>
+      </td>
+    </tr>
+    <tr>
+      <td>Have you ever been diagnosed with serious illness? (if yes, please specify)
+        <input type="text" name="illness_details" placeholder="Details (if yes)" />
+      </td>
+      <td class="yn">
+        <label><input type="radio" name="illness" value="Yes" required /> Yes</label>
+        <label><input type="radio" name="illness" value="No" /> No</label>
+      </td>
+    </tr>
+  </table>
+
+  <!-- REFERENCES -->
+  <div class="scroll">
+  <table id="refTable">
+    <tr class="section-head"><th colspan="4">PERSONAL REFERENCE (Please provide names of your previous supervisors / immediate managers)</th></tr>
+    <tr><th style="width:35%">Name</th><th>Occupation</th><th style="width:18%">Telephone</th><th style="width:14%">Years Known</th></tr>
+  </table>
+  </div>
+
+  <!-- CONSENT -->
+  <table>
+    <tr class="section-head"><th>CONSENT CLAUSE</th></tr>
+    <tr><td class="consent">
+      <p>The Personal Data Protection Act 2010 ("PDPA") was introduced by the Government to regulate the processing of Personal Data in commercial transactions. The PDPA, which applies to all companies that are established in Malaysia, requires us to inform you of your rights in respect of your Personal Data (hereinafter defined) that is being processed or that is to be collected and further processed by us and the purposes for the data processing. The PDPA also requires us to obtain your consent to the processing of your Personal Data.</p>
+      <p>Consequently, we want you to be clear how we are using your Personal Data and the ways in which you can protect your privacy. This Privacy Statement describes on what information is gathered, how this information is used and stored, who the information will be shared with, how you can opt out and how you can modify your Personal Data held by us and any other changes that have been made from time to time.</p>
+      <p>Where indicated in our application forms, it is obligatory to provide your personal data to us to enable us to process your application for employment. Should you fail to provide a complete and obligatory personal data, we may not be able to process your application.</p>
+      <label class="check"><input type="checkbox" name="pdpa_consent" value="Agreed" required /> I consent to the processing of my Personal Data as described above.</label>
+    </td></tr>
+  </table>
+
+  <!-- DECLARATION -->
+  <table>
+    <tr class="section-head"><th colspan="2">DECLARATION</th></tr>
+    <tr><td colspan="2" class="consent">
+      I hereby declare that all the information given in this form is true and understand that if at any time after engagement, it is found that a false declaration has been made in this form, the Company shall have the right to terminate my employment without notice. I authorize the Company to confirm all information provided herein with any relevant parties through any means necessary such as Reference, Background, CTOS &amp; MACC Check.
+      <label class="check"><input type="checkbox" name="declaration" value="Agreed" required /> I agree to the declaration above.</label>
+    </td></tr>
+    <tr>
+      <td>Signature of Applicant (type full name):<input type="text" name="signature" required /></td>
+      <td style="width:30%">Date:<input type="date" name="date" id="dateField" required /></td>
+    </tr>
+  </table>
+
+  <!-- RELATIVES -->
+  <table id="relTable">
+    <tr class="section-head"><th colspan="2">LIST OF NAMES OF RELATIVES / FRIENDS EMPLOYED WITH DRB-HICOM OR ITS SUBSIDIARIES</th></tr>
+    <tr><th>Name &amp; Company</th><th style="width:35%">Relationship</th></tr>
+  </table>
+
+  <!-- EMERGENCY -->
+  <table>
+    <tr class="section-head"><th colspan="2">EMERGENCY CONTACT DETAILS</th></tr>
+    <tr><td class="label">Name</td><td><input type="text" name="emergency_name" required /></td></tr>
+    <tr><td class="label">Relationship</td><td><input type="text" name="emergency_relationship" required /></td></tr>
+    <tr><td class="label">Telephone</td><td><input type="tel" name="emergency_phone" required /></td></tr>
+  </table>
+
+  <div class="actions">
+    <button type="button" class="secondary" id="printBtn">Print / Save as PDF</button>
+    <button type="reset" class="secondary">Clear</button>
+    <button type="submit" class="primary">Submit Application</button>
+  </div>
+  <div class="msg" id="msg"></div>
+</form>
+
+<script>
+  /* ================= CONFIG =================
+     Put the email address that should RECEIVE applications here.
+     (After the first test submission, FormSubmit sends an activation
+     email to this address – click the link once to activate.)
+     Tip: after activation FormSubmit gives you a random alias string;
+     you can put that here instead of the real email to hide it. */
+  const HR_EMAIL = "hr@yourcompany.com";
+  const FORM_ENDPOINT = `https://formsubmit.co/ajax/${HR_EMAIL}`;
+  /* ========================================== */
+
+  // Build repeated rows (matches the paper form's 4 rows per table)
+  function addRows(tableId, fields, count = 4) {
+    const table = document.getElementById(tableId);
+    for (let i = 1; i <= count; i++) {
+      const tr = document.createElement("tr");
+      fields.forEach(([key, type]) => {
+        const td = document.createElement("td");
+        const input = document.createElement("input");
+        input.type = type || "text";
+        input.name = `${tableId.replace("Table", "")}_${i}_${key}`;
+        td.appendChild(input);
+        tr.appendChild(td);
+      });
+      table.appendChild(tr);
+    }
+  }
+
+  addRows("qualTable",   [["institution"], ["qualification"], ["result"], ["year", "number"]]);
+  addRows("memberTable", [["membership"], ["year", "number"]]);
+  addRows("empTable",    [["employer"], ["position"], ["date_join", "month"], ["date_left", "month"], ["salary"]]);
+  addRows("refTable",    [["name"], ["occupation"], ["telephone", "tel"], ["years_known", "number"]], 3);
+  addRows("relTable",    [["name_company"], ["relationship"]], 3);
+
+  // Default date = today
+  document.getElementById("dateField").valueAsDate = new Date();
+
+  document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+  const form = document.getElementById("appForm");
+  const msg = document.getElementById("msg");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    msg.style.color = "";
+    msg.textContent = "Submitting...";
+    const data = new FormData(form);
+    const applicant = data.get("name") || "Applicant";
+    const post = data.get("post_applied") || "";
+    data.append("_subject", `Job Application: ${applicant} – ${post}`);
+    data.append("_template", "table");   // neat table layout in the email
+    data.append("_captcha", "false");
+    data.append("_replyto", data.get("email") || "");
+    // Drop empty optional rows so the email stays clean
+    for (const [k, v] of [...data.entries()]) {
+      if (typeof v === "string" && v.trim() === "") data.delete(k);
+    }
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        body: data,
+        headers: { Accept: "application/json" }
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && String(json.success) !== "false") {
+        msg.style.color = "green";
+        msg.textContent = "Application submitted successfully. Thank you!";
+        form.reset();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      msg.style.color = "crimson";
+      msg.textContent = "Submission failed. Please try again or print/save as PDF.";
+    }
+  });
+</script>
+</body>
+</html>
